@@ -1,11 +1,5 @@
-import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
-// import { Link } from 'react-router-dom'
-import authBg1 from './assets/auth_bg1.svg'
-import authBg2 from './assets/auth_bg2.svg'
-import authBg3 from './assets/auth_bg3.svg'
-import authBg4 from './assets/auth_bg4.svg'
-import authBg5 from './assets/auth_bg5.svg'
+import React, { useState, useEffect } from 'react'
+import { withRouter, useHistory } from 'react-router-dom'
 import AuthInputBox from '../../components/AuthInputBox'
 import FormWrapper from '../../components/AuthFormWrapper'
 import styles from '../../component-styles/AuthFormElements.module.css'
@@ -37,6 +31,15 @@ const Signup = () => {
     setcurrentImage(i)
     console.log(images[i], i)
   }
+
+  const history = useHistory()
+
+  useEffect(() => {
+    const userInfo = sessionStorage.getItem(`user`)
+    const redirect = sessionStorage.getItem(`workSpaceInviteRedirect`)
+
+    if (userInfo && userInfo !== null) history.push(redirect)
+  }, [history])
 
   const handleSubmit = async e => {
     e.preventDefault()
