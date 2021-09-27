@@ -2,10 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import headerStyles from '../component-styles/HeaderStyle.module.css'
 import zurichatlogo from '../component-assets/zurichatlogo.svg'
-import { Button } from '../pages/createworkspace/components/WorkspaceHome'
+//import { Button } from '../pages/createworkspace/components/WorkspaceHome'
 
 const HeaderSearchSuggestion = () => {
-
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-light ${headerStyles.navbar}`}
@@ -17,8 +16,8 @@ const HeaderSearchSuggestion = () => {
         <img
           src={zurichatlogo}
           alt="zuri-logo"
-          width="20"
-          height="20"
+          width="30"
+          height="30"
           className={`d-inline-block align-top ${headerStyles.image}`}
         />
         <span className={`mb-2 ${headerStyles.zuriChat}`}>Zuri Chat</span>
@@ -27,8 +26,11 @@ const HeaderSearchSuggestion = () => {
       <button
         className={`navbar-toggler ${headerStyles.toggle}`}
         type="button"
-        data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText"
-        aria-expanded="false" aria-label="Toggle navigation"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
         <span className={headerStyles.navbar_toggle_icon}>
           <span></span>
@@ -78,55 +80,47 @@ const HeaderSearchSuggestion = () => {
               role="button"
               aria-expanded="false"
             >
-              <span className={`${headerStyles.item}`}>
-                Downloads
-              </span>
+              <span className={`${headerStyles.item}`}>Downloads</span>
             </Link>
           </li>
         </ul>
-        <ul class="navbar-nav d-lg-none me-auto my-2 my-lg-0 navbar-nav-scroll" >
-        <li className="nav-item">
-          <Link
-            to="/signup"
-            className={`nav-link ${headerStyles.navLinkSignUp}`}
-          >
-            <span className={`signup ${headerStyles.signU}`}>Sign Up</span>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            to="/login"
-            className={`btn ${headerStyles.signIn}`}
-            role="button"
-          >
-            <span className="signin">Sign In</span>
-          </Link>
-        </li> 
-      </ul>
+        <ul class={`d-lg-none navbar-nav-scroll ${headerStyles.signs}`}>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/signup"
+              className={`btn ${headerStyles.signU}`}
+            >
+              <span>Sign Up</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/login"
+              className={`btn ${headerStyles.signIn}`}
+              role="button"
+            >
+              <span className="signin">Login</span>
+            </Link>
+          </li>
+        </ul>
       </div>
-      <ul class="navbar-nav d-none d-lg-flex me-auto my-2 my-lg-0 navbar-nav-scroll" >
+      <ul
+        class={`navbar-nav d-none d-lg-flex me-auto my-2 my-lg-0 navbar-nav-scroll ${headerStyles.signs}`}
+      >
         <li className="nav-item">
-          <Link
-            to="/signup"
-            className={`nav-link btn ${headerStyles.navLinkSignUp}`}
-          >
-            <span className={` ${headerStyles.signU}`}>Sign Up</span>
+          <Link to="/signup">
+            <span className={`${headerStyles.signU}`}>Sign Up</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link
-            className={``}
-            to="/login"
-            className={`btn nav-link ${headerStyles.signIn}`}
-            role="button"
-          >
-            <span >Sign In</span>
+          <Link to="/login">
+            <span className={`${headerStyles.signIn}`}>Login</span>
           </Link>
-        </li> 
+        </li>
       </ul>
     </nav>
-
   )
 }
 export default HeaderSearchSuggestion

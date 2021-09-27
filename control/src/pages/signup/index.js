@@ -19,6 +19,8 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [tos, setTos] = useState(false)
   const [error, seterror] = useState('')
+  const [nameerror, setnameerror] = useState('')
+  const [passworderror, setpassworderror] = useState('')
   const [emailerror, setemailerror] = useState('')
   const [showDialog, setShowDialog] = useState(false)
 
@@ -38,6 +40,27 @@ const Signup = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+
+    if (!name) {
+      setnameerror(`Enter an email address`)
+      return
+    } else {
+      setnameerror(``)
+    }
+
+    if (!password) {
+      setpassworderror(`Enter a Password`)
+      return
+    } else {
+      setpassworderror(``)
+    }
+
+    if (!tos) {
+      seterror(`You must agree to terms and conditions`)
+      return
+    } else {
+      seterror(``)
+    }
 
     //Seperate user fullname
     const seperateName = name.split(' ')
@@ -60,14 +83,16 @@ const Signup = () => {
       })
       .then(response => {
         const { data, message } = response.data
-        console.log(response.data)
+        // console.log(response.data)
         setShowDialog(true)
 
         //Store token in localstorage
         sessionStorage.setItem('user_id', data.InsertedId)
+        localStorage.setItem('newUserEmail', JSON.stringify(email))
+        localStorage.setItem('userUserPassword', JSON.stringify(password))
 
         //Display message
-        alert(message) //Change this when there is a design
+        // alert(message) //Change this when there is a design
 
         setTimeout(() => {
           //Redirect to some other page
@@ -100,11 +125,8 @@ const Signup = () => {
           googleHeader="Sign up with Google"
           topLineText="OR"
           submitButtonName="Sign up"
-          name={name}
+          disabled={name && email && password && tos}
           error={error}
-          email={email}
-          password={password}
-          check={tos}
           handleSubmit={handleSubmit}
           bottomLine="Already have an account?"
           bottomLink="Log in"
@@ -118,8 +140,8 @@ const Signup = () => {
             placeholder="Enter your Name"
             value={name}
             setValue={setName}
-            onFocus={displayImage}
-            // error={error}
+            // onFocus={displayImage}
+            error={nameerror}
           />
           <AuthInputBox
             className={`${styles.inputElement}`}
@@ -140,8 +162,8 @@ const Signup = () => {
             placeholder="Enter a password"
             value={password}
             setValue={setPassword}
-            onFocus={displayImage}
-            // error={error}
+            // onFocus={displayImage}
+            error={passworderror}
           />
           {/* <AuthInputBox
             className={`${styles.inputElement}`}

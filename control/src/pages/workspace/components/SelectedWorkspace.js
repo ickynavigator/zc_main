@@ -1,22 +1,20 @@
 import React from 'react'
 import { useWorkspaceContext } from './WorkspaceContext'
 import styles from '../style/workspace.module.css'
-import { useHistory } from 'react-router-dom'
 
 const SelectedWorkspace = () => {
-  const { organizations } = useWorkspaceContext()
+  const { organizations, redirectPage } = useWorkspaceContext()
 
   const numSelectedWorkspace = organizations.filter(org => org.selected)
 
   const numberOfSelected =
     numSelectedWorkspace.length > 0 ? numSelectedWorkspace.length : 'None'
-  const history = useHistory()
 
   const handleNextPage = () => {
     if (!numSelectedWorkspace.length) {
       return
     } else {
-      history.push('/home')
+      redirectPage()
     }
   }
 
@@ -25,12 +23,9 @@ const SelectedWorkspace = () => {
       <p>{numberOfSelected} selected</p>
       <button
         style={{
-          background: `${
-            !numSelectedWorkspace.length ? '#00b87c79' : '#00B87C'
-          }`,
-          borderColor: `${
-            !numSelectedWorkspace.length ? '#00b87c79' : '#00B87C'
-          }`
+          background: `${!numSelectedWorkspace.length ? '#BEBEBE' : '#00B87C'}`,
+          color: `${!numSelectedWorkspace.length ? '#242424' : '#ffffff'}`,
+          borderColor: `${!numSelectedWorkspace.length ? '#C4C4C4' : '#00B87C'}`
         }}
         type="button"
         className={`${styles.workspace_btn}`}
