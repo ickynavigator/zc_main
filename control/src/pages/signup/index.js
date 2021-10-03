@@ -6,6 +6,13 @@ import styles from '../../component-styles/AuthFormElements.module.css'
 import axios from 'axios'
 
 import EmailVerification from './email-verify'
+import { Helmet } from 'react-helmet'
+// import { Link } from 'react-router-dom'
+// import authBg1 from './assets/auth_bg1.svg'
+// import authBg2 from './assets/auth_bg2.svg'
+// import authBg3 from './assets/auth_bg3.svg'
+// import authBg4 from './assets/auth_bg4.svg'
+// import authBg5 from './assets/auth_bg5.svg'
 
 const Signup = () => {
   const [name, setName] = useState('')
@@ -115,12 +122,16 @@ const Signup = () => {
   return (
     <main id={styles.authPageWrapper}>
       {showDialog && <EmailVerification email={email} />}
-      <aside id={styles.authAsideContainer} className={styles.display_none}>
+      {/* <aside id={styles.authAsideContainer} className={styles.display_none}>
         <div id={styles.authImageWrapper}>
           <img src={images[currentImage]} alt="backgroundImage" />
-          {/* <div id={styles.aside_txt}></div> */}
+<div id={styles.aside_txt}></div>
         </div>
-      </aside>
+      </aside> */}
+
+      <Helmet>
+        <title>Sign Up - Zuri Chat</title>
+      </Helmet>
       <section id={styles.authFormContainer}>
         <FormWrapper
           header="Create Account"

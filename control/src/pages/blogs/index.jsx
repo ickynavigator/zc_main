@@ -2,19 +2,23 @@ import React from 'react'
 import styles from './Style/style.module.css'
 import BlogContent from './components/blogContent'
 import NewsLetter from './components/newsLetterSection'
-import Comments from './components/comments'
+import BlogComments from './components/BlogComments'
 import RelatedArticles from './components/relatedArticles'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-const index = () => {
+import { Helmet } from 'react-helmet'
+const Blog = () => {
   return (
     <>
       <Header />
+      <Helmet>
+        <title>Blogs - Zuri Chat</title>
+      </Helmet>
       <div className={styles.Blog_container}>
         <div className={styles.Blog_text}>
           <BlogContent />
           <NewsLetter />
-          <Comments />
+          <BlogComments />
         </div>
         <div className={styles.keep_reading}>
           <RelatedArticles />
@@ -25,4 +29,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Blog
