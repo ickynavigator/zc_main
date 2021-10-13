@@ -23,10 +23,6 @@ const defaultConfig = {
 const RemoveModal = ({ config = defaultConfig }) => {
 
     const { currentMembers, removeFunction, title, show, handleClose } = config
-
-    // const [show, setShow] = useState(false)
-    // const handleClose = () => setShow(false)
-    // const handleShow = () => setShow(true)
     // const animatedComponents = makeAnimated()
 
 
@@ -62,8 +58,8 @@ const RemoveModal = ({ config = defaultConfig }) => {
                         placeholder="Add members to remove"
                     />
                     <div className="mb-2"></div> */}
-                    {currentMembers.map(m => (
-                        <div className="container mb-2 d-flex justify-content-between">
+                    {currentMembers.map((m,i) => (
+                        <div className="container mb-2 d-flex justify-content-between" key={i}>
                             <div className="">
                                 <img src={m.image} alt="" className="rounded" width="45px" height="45px" />
                                 <span className="mx-2">{m.name}</span>
