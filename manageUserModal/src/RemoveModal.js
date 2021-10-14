@@ -1,86 +1,75 @@
-// import React, { useState } from "react"
 import React from "react"
 import styles from "./styles/removemodal.module.css"
 import { Button, Modal } from "react-bootstrap"
-import { X } from 'react-feather'
-// import Select from "react-select"
-// import makeAnimated from "react-select/animated"
+import { X } from "react-feather"
 
+const defaultImgSrc =
+  "https://www.kemhospitalpune.org/wp-content/uploads/2020/12/Profile_avatar_placeholder_large.png"
 const defaultConfig = {
-    currentMembers: [
-        {
-            id: "xxx",
-            name: "xxx",
-            image: "https://www.kemhospitalpune.org/wp-content/uploads/2020/12/Profile_avatar_placeholder_large.png"
-        },
-    ],
-    removeFunction: id => console.log("REMOVE >>", id),
-    show:true,
-    handleClose: () => console.log("Close modal"),
-    title:"Remove users"
+  currentMembers: [
+    {
+      id: "xxx1",
+      name: "xxx",
+      image: defaultImgSrc
+    }
+  ],
+  removeFunction: id => console.warn("REMOVE >>", id),
+  show: true,
+  handleClose: () => {},
+  title: "Remove users"
 }
 
 const RemoveModal = ({ config = defaultConfig }) => {
+  const { currentMembers, removeFunction, title, show, handleClose } = config
 
-    const { currentMembers, removeFunction, title, show, handleClose } = config
-    // const animatedComponents = makeAnimated()
-
-
-    // const options = currentMembers.map(m => {
-    //     return {
-    //         value: m.id,
-    //         label: m.name
-    //     }
-    // })
-
-    return (
-        <div className={`${styles.wrapper}`}>
-            {/* <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button> */}
-            <Modal
-                show={show}
-                onHide={handleClose}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                backdrop="static"
-                keyboard={false}
+  return (
+    <div className={`${styles.wrapper}`}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        backdrop="static"
+        keyboard={false}
+        scrollable
+      >
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {currentMembers.map((m, i) => (
+            <div
+              className="container mb-2 d-flex justify-content-between"
+              key={m.id || i}
             >
-                <Modal.Header>
-                    <Modal.Title>{title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {/* <Select
-                        closeMenuOnSelect={false}
-                        components={animatedComponents}
-                        isMulti
-                        options={options}
-                        placeholder="Add members to remove"
-                    />
-                    <div className="mb-2"></div> */}
-                    {currentMembers.map((m,i) => (
-                        <div className="container mb-2 d-flex justify-content-between" key={i}>
-                            <div className="">
-                                <img src={m.image} alt="" className="rounded" width="45px" height="45px" />
-                                <span className="mx-2">{m.name}</span>
-                            </div>
-                            <Button size="sm" className="" variant="outline-danger" onClick={() => removeFunction(m.id)}>
-                                <X strokeWidth={1}/>
-                            </Button>
-                        </div>
-                    ))}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Done
-                    </Button>
-                    {/* <Button variant="primary" onClick={handleClose}>
-                        Delete Selected
-                    </Button> */}
-                </Modal.Footer>
-            </Modal>
-        </div>
-    )
+              <div className="">
+                <img
+                  src={m.image ? m.image : defaultImgSrc}
+                  alt=""
+                  className="rounded"
+                  width="45px"
+                  height="45px"
+                />
+                <span className="mx-2">{m.name}</span>
+              </div>
+              <Button
+                size="sm"
+                variant="outline-danger"
+                onClick={() => removeFunction(m.id)}
+              >
+                <X strokeWidth={1} />
+              </Button>
+            </div>
+          ))}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Done
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  )
 }
 
 export default RemoveModal
