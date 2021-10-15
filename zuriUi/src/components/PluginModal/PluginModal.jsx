@@ -20,6 +20,7 @@ import {
   AiOutlineLock
 } from "react-icons/ai"
 import { ListGroup } from "react-bootstrap"
+import { GetWorkspaceUsers } from "../../../../control/src/zuri-control"
 
 function PluginModal({ close, showDialog, tabIndex, config }) {
   const [showEditTopicModal, setShowEditTopicModal] = useState(false)
@@ -185,12 +186,12 @@ function AboutPanel({
 //       )
 //   }
 function MembersPanel({ config }) {
-  const { membersList, usersList, addmembersevent, removememberevent } = config.roomInfo
+  const { membersList, addmembersevent, removememberevent } = config.roomInfo
   const [addModalShow, setaddModalShow] = useState(false)
   const [removeModalShow, setremoveModalShow] = useState(false)
   const [selectedMember, setSelectedMember] = useState(null)
   const [isLoading, setisLoading] = useState(false)
-  const [userList, setuserList] = useState([])
+  const [userList, setUserList] = useState([])
   const handleClose = () => {
     setaddModalShow(false)
     setremoveModalShow(false)
@@ -209,12 +210,22 @@ function MembersPanel({ config }) {
     handleremoveModalShow()
   }
   useEffect(() => {
-    
-    setuserList(
-      usersList.map(item => {
-        return { value: item._id, label: item.email }
-      })
-    )
+    async function call() {
+      try {
+        const users = await GetWorkspaceUsers();
+        if (users['totalUsers']) {
+          delete users.totalUsers
+        }
+        let worksplaceUsers = Object.values(users).filter(m => !membersList.includes(m))
+        worksplaceUsers = worksplaceUsers.map(item => {
+          return { value: item._id, label: item.email }
+        })
+        setUserList(worksplaceUsers)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    call();
     setisLoading(true)
   }, [])
   return (
