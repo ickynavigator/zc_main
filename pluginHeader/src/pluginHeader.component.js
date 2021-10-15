@@ -14,17 +14,17 @@ export default function Header(props) {
       icon: "", //Image on header
       thumbnailUrl: [], //Replace with images of users
       userCount: 10, //User count on header
-      hasThumbnail: true 
-     },
-    roomInfo: {
-      membersList: membersList,
-      addmembersevent: values => {
-        console.warn("a plugin added ", values)
-      },
-      removememberevent: id => {
-        console.warn("a plugin deleted ", id)
+      hasThumbnail: true ,
+      roomInfo: {
+        membersList: membersList,
+        addmembersevent: values => {
+          console.warn("a plugin added ", values)
+        },
+        removememberevent: id => {
+          console.warn("a plugin deleted ", id)
+        }
       }
-    }
+     }
   }
   return (
     <div>
