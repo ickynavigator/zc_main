@@ -185,7 +185,7 @@ function AboutPanel({
 //       )
 //   }
 function MembersPanel({ config }) {
-  const { membersList, addmembersevent, removememberevent } = config.roomInfo
+  const { membersList, usersList, addmembersevent, removememberevent } = config.roomInfo
   const [addModalShow, setaddModalShow] = useState(false)
   const [removeModalShow, setremoveModalShow] = useState(false)
   const [selectedMember, setSelectedMember] = useState(null)
@@ -209,8 +209,9 @@ function MembersPanel({ config }) {
     handleremoveModalShow()
   }
   useEffect(() => {
+    
     setuserList(
-      membersList.map(item => {
+      usersList.map(item => {
         return { value: item._id, label: item.email }
       })
     )

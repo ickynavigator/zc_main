@@ -9,6 +9,13 @@ export default function Header(props) {
   const [tabIndex, setTabIndex] = useState(0)
 
   const dummyHeaderConfig = {
+    headerConfig:{
+      name: "", //Name on header
+      icon: "", //Image on header
+      thumbnailUrl: [], //Replace with images of users
+      userCount: 10, //User count on header
+      hasThumbnail: true 
+     },
     roomInfo: {
       membersList: membersList,
       addmembersevent: values => {
